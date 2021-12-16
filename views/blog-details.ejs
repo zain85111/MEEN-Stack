@@ -1,0 +1,35 @@
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<div class="container">
+        <% if(blog != null) { %>
+            <h4><%= blog.title %></h4>
+            <h5>Snippet:</h5>
+            <h6><%= blog.snippet %></h6>
+            <div class="">
+                <h5>Body:</h5>
+                <p><%= blog.body %></p>
+                <hr>
+                <a href="#!" class="btn">Edit</a>
+                <a href="#!" data-doc="<%= blog._id %>" class="btn red delete">Delete</a>
+            </div>
+        <% } else { %>
+            <h5>No blogs!!</h5>
+        <% } %>
+</div>
+
+<script>
+    const del = document.querySelector('a.delete');
+    del.addEventListener('click',()=>{
+        const endpoint = `/delete-blog/${del.dataset.doc}`;
+        fetch(endpoint,{
+            method:'DELETE'
+        })
+        .then((response)=> response.json())
+        .then((data)=> window.location.href = data.redirect)
+        .catch((err)=> console.log(err))
+    })
+</script>
+
+  
+<%- include('./partials/footer.ejs') %>

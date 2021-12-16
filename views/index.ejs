@@ -1,0 +1,30 @@
+
+<%- include('./partials/head.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+<div class="container">
+    <ul class="collapsible">
+        <% if(blogs.length > 0) { %>
+            <% blogs.forEach(blog =>{ %>
+                <li>
+                    <div class="collapsible-header">
+                        <div>
+                            <h5><%= blog.title %></h5>
+                            <p><%= blog.snippet %></p>
+                        </div>
+                    </div>
+                    <div class="collapsible-body">
+                        <p class="truncate"><%= blog.body %></p>
+                        <hr>
+                        <a href="/blog/<%= blog._id %>">See Details</a>
+                    </div>
+                </li>
+            <% })%>
+        <% } else { %>
+            <h5>No blogs!!</h5>
+        <% } %>
+    </ul>        
+</div>
+
+
+<%- include('./partials/footer.ejs') %>
